@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+  <title>SQL</title>
+</head>
+<body>
+  <h1>
+  QUERY DRIP DB
+  </h1>
+
+  <h3>Inserire Parametri di ricerca</h3>
+  <form action="{{url_for('ricerca')}}">
+    <input type="text" name="MarcaScarpaQ" size="20" placeholder="Marca della scarpa">
+    <input type="text" name="ModelloScarpaQ" size="20" placeholder="Modello della Scarpa">
+    <input type="text" name="ColorwayScarpaQ" size="20" placeholder="Colorway della scarpa">
+    <input type="number" name="PrezzoRetailQ" size="4" placeholder="Prezzo">
+    <button type="submit">Ricerca</button>
+  </form>  
+
+  <h3>Risultati Ricerca Scarpe</h3>
+  <table>
+    <tr>
+      <th>Marca</th>
+      <th>Modello</th>
+      <th>Colorway</th>
+      <th>Prezzo</th>
+      
+    </tr>
+     {% for m in QueryToHtml %}
+      <tr>
+        <td>{{m['marca']}}</td>
+        <td>{{m['modello']}}</td>
+        <td>{{m['colorway']}}</td>
+        <td>{{m['prezzoRetail']}}</td>
+        
+      </tr>
+     {% endfor %}
+  </table>
+
+  <h3>Inserire Parametri di ricerca VESTITI</h3>
+  <form action="{{url_for('ricercaVestito')}}">
+    <input type="text" name="MarcaVestitoQ" size="20" placeholder="Marca dell vestito">
+    <input type="text" name="ModelloVestitoQ" size="20" placeholder="Modello del vestito">
+    <input type="text" name="ColorwayVestitoQ" size="20" placeholder="Colorway del vestito">
+    <input type="number" name="PrezzoRetailVestitoQ" size="4" placeholder="Prezzo">
+    <button type="submit">Ricerca</button>
+  </form>  
+
+  <h3>Risultati Ricerca Vestiti</h3>
+  <table>
+    <tr>
+      <th>Marca</th>
+      <th>Modello</th>
+      <th>Colorway</th>
+      <th>Prezzo</th>
+
+    </tr>
+     {% for m in QueryToHtmlV %}
+      <tr>
+        <td>{{m['marca']}}</td>
+        <td>{{m['modello']}}</td>
+        <td>{{m['colorway']}}</td>
+        <td>{{m['prezzoRetail']}}</td>
+
+      </tr>
+     {% endfor %}
+  </table>
+
+</body>
+</html>

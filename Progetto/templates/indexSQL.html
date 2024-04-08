@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL</title>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+  <h1>
+  DRIP DATABASE
+  </h1>
+
+  <h3>Form inserimento scarpe</h3>
+  <form action="{{url_for('inserisci')}}" method="POST">
+    <input type="text" name="MarcaScarpa" size="20" placeholder="Marca della scarpa">
+    <input type="text" name="ModelloScarpa" size="20" placeholder="Modello della Scarpa">
+    <input type="text" name="ColorwayScarpa" size="20" placeholder="Colorway della scarpa">
+    <input type="number" name="PrezzoRetail" size="4" placeholder="Prezzo">
+    <button type="submit">Inserisci</button>
+  </form>  
+  
+  <h3>Scarpe</h3>
+  <table>
+    <tr>
+      <th>Marca</th>
+      <th>Modello</th>
+      <th>Colorway</th>
+      <th>Prezzo</th>
+      <th>Cancella</th>
+    </tr>
+     {% for m in DBtoHtml %}
+      <tr>
+        <td>{{m['marca']}}</td>
+        <td>{{m['modello']}}</td>
+        <td>{{m['colorway']}}</td>
+        <td>{{m['prezzoRetail']}}</td>
+        <td>
+          <form action ="{{url_for('cancellaScarpa', idscarpa=m['_id'])}}" method = "POST">
+            <button type="submit">Cancella</button>
+          </form>
+      </tr>
+     {% endfor %}
+  </table>
+
+  <h3>Form inserimento Vestiti</h3>
+  <form action="{{url_for('inserisciV')}}" method="POST">
+    <input type="text" name="MarcaVestito" size="20" placeholder="Marca del vestito">
+    <input type="text" name="ModelloVestito" size="40" placeholder="Modello del vestito">
+    <input type="text" name="ColoreVestito" size="20" placeholder="Colorway del vestito">
+    <input type="number" name="PrezzoRetail" size="4" placeholder="Prezzo">
+    <button type="submit">Inserisci</button>
+  </form>  
+
+  <h3>Vestiti</h3>
+  <table>
+    <tr>
+      <th>Marca</th>
+      <th>Modello</th>
+      <th>Colorway</th>
+      <th>Prezzo</th>
+      <th>Cancella</th>
+    </tr>
+     {% for m in DBtoHtmlV %}
+      <tr>
+        <td>{{m['marca']}}</td>
+        <td>{{m['modello']}}</td>
+        <td>{{m['colorway']}}</td>
+        <td>{{m['prezzoRetail']}}</td>
+        <td>
+          <form action ="{{url_for('cancellaVestito', idvestito=m['_id'])}}" method = "POST">
+            <button type="submit">Cancella</button>
+          </form>
+      </tr>
+     {% endfor %}
+  </table>
+  
+</body>
+</html>
